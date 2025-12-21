@@ -1,6 +1,6 @@
 # Transmitly.ChannelProvider.Firebase.Configuration
 
-A shared configuration for the Transmitly Firebase channel provider.
+A shared configuration for the Transmitly™ Firebase channel provider.
 
 ### Getting started
 
