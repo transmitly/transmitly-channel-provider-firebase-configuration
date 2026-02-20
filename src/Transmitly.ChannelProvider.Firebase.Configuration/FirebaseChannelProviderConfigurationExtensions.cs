@@ -26,7 +26,7 @@ namespace Transmitly.ChannelProvider.Firebase.Configuration
 		/// </summary>
 		/// <param name="channelProviders"></param>
 		/// <param name="providerId"></param>
-		/// <returns></returns>
+		/// <returns></returns>F
 		public static string Firebase(this ChannelProviders channelProviders, string? providerId = null)
 		{
 			Guard.AgainstNull(channelProviders);

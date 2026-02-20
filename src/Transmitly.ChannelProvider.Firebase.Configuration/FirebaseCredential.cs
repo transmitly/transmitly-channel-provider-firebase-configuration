@@ -30,29 +30,30 @@ namespace Transmitly.ChannelProvider.Firebase.Configuration
 		public bool IsAccessToken => !string.IsNullOrWhiteSpace(AccessToken);
 		public bool IsFilePath => !string.IsNullOrWhiteSpace(FilePath);
 		public bool IsDefault { get; private set; }
+		public IEnumerable<string>? Scopes { get; private set; }
 
-		public static FirebaseCredential FromJson(string json)
+		public static FirebaseCredential FromJson(string json, IEnumerable<string> scopes = null)
 		{
-			return new FirebaseCredential { Json = json };
+			return new FirebaseCredential { Json = json, Scopes = scopes };
 		}
 
-		public static FirebaseCredential FromAccessToken(string accessToken)
+		public static FirebaseCredential FromAccessToken(string accessToken, IEnumerable<string> scopes = null)
 		{
-			return new FirebaseCredential { AccessToken = accessToken };
+			return new FirebaseCredential { AccessToken = accessToken, Scopes = scopes };
 		}
 
-		public static FirebaseCredential FromFile(string filePath)
+		public static FirebaseCredential FromFile(string filePath, IEnumerable<string> scopes = null)
 		{
-			return new FirebaseCredential { FilePath = filePath };
+			return new FirebaseCredential { FilePath = filePath, Scopes = scopes };
 		}
-		public static FirebaseCredential GetApplicationDefault()
+		public static FirebaseCredential GetApplicationDefault(IEnumerable<string> scopes = null)
 		{
-			return new FirebaseCredential { IsDefault = true };
+			return new FirebaseCredential { IsDefault = true, Scopes = scopes };
 		}
 
-		public static FirebaseCredential FromStream(Stream stream)
+		public static FirebaseCredential FromStream(Stream stream, IEnumerable<string> scopes = null)
 		{
-			return new FirebaseCredential { Stream = stream };
+			return new FirebaseCredential { Stream = stream, Scopes = scopes };
 		}
 	}
 }
