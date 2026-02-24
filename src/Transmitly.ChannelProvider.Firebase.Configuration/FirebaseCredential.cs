@@ -30,30 +30,56 @@ namespace Transmitly.ChannelProvider.Firebase.Configuration
 		public bool IsAccessToken => !string.IsNullOrWhiteSpace(AccessToken);
 		public bool IsFilePath => !string.IsNullOrWhiteSpace(FilePath);
 		public bool IsDefault { get; private set; }
-		public IEnumerable<string>? Scopes { get; private set; }
 
-		public static FirebaseCredential FromJson(string json, IEnumerable<string> scopes = null)
+		/// <summary>
+		/// Returns the Application Default Credentials which are ambient credentials that identify and authorize
+		/// the whole application.
+		/// </summary>
+		/// <returns>The application default credentials.</returns>
+		public static FirebaseCredential GetApplicationDefault()
 		{
-			return new FirebaseCredential { Json = json, Scopes = scopes };
+			return new FirebaseCredential { IsDefault = true };
 		}
 
-		public static FirebaseCredential FromAccessToken(string accessToken, IEnumerable<string> scopes = null)
+		/// <summary>
+		/// Loads credential from a string containing JSON credential data.
+		/// </summary>
+		/// <param name="json">The JSON credential data.</param>
+		/// <returns>A credential based on the provided JSON.</returns>
+		public static FirebaseCredential FromJson(string json)
 		{
-			return new FirebaseCredential { AccessToken = accessToken, Scopes = scopes };
+			return new FirebaseCredential { Json = json };
 		}
 
-		public static FirebaseCredential FromFile(string filePath, IEnumerable<string> scopes = null)
+		/// <summary>
+		/// Create a credential directly from the provided access token.
+		/// The access token will not be automatically refreshed.
+		/// </summary>
+		/// <param name="accessToken">The access token to use within this credential.</param>
+		/// <returns>A credential based on the provided access token.</returns>
+		public static FirebaseCredential FromAccessToken(string accessToken)
 		{
-			return new FirebaseCredential { FilePath = filePath, Scopes = scopes };
-		}
-		public static FirebaseCredential GetApplicationDefault(IEnumerable<string> scopes = null)
-		{
-			return new FirebaseCredential { IsDefault = true, Scopes = scopes };
+			return new FirebaseCredential { AccessToken = accessToken };
 		}
 
-		public static FirebaseCredential FromStream(Stream stream, IEnumerable<string> scopes = null)
+		/// <summary>
+		/// Loads credential from the specified file containing JSON credential data.
+		/// </summary>
+		/// <param name="filePath">The path to the credential file.</param>
+		/// <returns>A credential based on the provided file.</returns>
+		public static FirebaseCredential FromFile(string filePath)
 		{
-			return new FirebaseCredential { Stream = stream, Scopes = scopes };
+			return new FirebaseCredential { FilePath = filePath };
+		}
+
+		/// <summary>
+		/// Loads credential from stream containing JSON credential data.
+		/// </summary>
+		/// <param name="stream">The stream containing the credential data.</param>
+		/// <returns>A credential based on the provided stream.</returns>
+		public static FirebaseCredential FromStream(Stream stream)
+		{
+			return new FirebaseCredential { Stream = stream };
 		}
 	}
 }
