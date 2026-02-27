@@ -40,7 +40,7 @@ namespace Transmitly.ChannelProvider.Firebase.Configuration
 		/// If specified, it will be used for the application with the specified name and any subsequent instance 
 		/// with the same name will reuse the initial credential.
 		/// </summary>
-		public string AppName { get; set; }
+		public string AppName { get; set; } = "default";
 
 	}
 }
