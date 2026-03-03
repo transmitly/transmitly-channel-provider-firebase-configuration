@@ -1,14 +1,34 @@
 # Transmitly.ChannelProvider.Firebase.Configuration
 
-A shared configuration for the Transmitly Firebase channel provider.
+Shared Firebase configuration primitives for Transmitly channel-provider implementations.
 
-### Getting started
+## Should you use this package?
 
-If you're just starting out with Transmitly, you likely want to be using the [transmitly-channel-provider-firebase](https://github.com/transmitly/transmitly-channel-provider-firebase) package instead.
+Use this package if you are authoring a Firebase channel provider (or extension) for the Transmitly ecosystem and need the common Firebase configuration types.
 
-See the [Transmitly](https://github.com/transmitly/transmitly) project for more details on what a channel provider is and how it can be configured.
+If you are building an application and just want to send push notifications through Firebase, use [`transmitly-channel-provider-firebase`](https://github.com/transmitly/transmitly-channel-provider-firebase) instead.
 
+## What this package provides
+
+- `FirebaseOptions`: common provider options (`Credential`, `ProjectId`, `ServiceAccountId`, `AppName`).
+- `FirebaseCredential`: credential helpers for common auth sources.
+- `FirebaseConstant.Id`: the default provider id (`"Firebase"`).
+- `ChannelProviders.Firebase(...)`: extension for building a provider id with optional instance suffix.
+
+## Credential helpers
+
+`FirebaseCredential` supports the following factory methods:
+
+- `GetApplicationDefault()`
+- `FromJson(string json)`
+- `FromAccessToken(string accessToken)`
+- `FromFile(string filePath)`
+- `FromStream(Stream stream)`
+
+## Related projects
+
+- [Transmitly](https://github.com/transmitly/transmitly)
+- [transmitly-channel-provider-firebase](https://github.com/transmitly/transmitly-channel-provider-firebase)
 
 ---
-_Copyright Â© Code Impressions, LLC.  This open-source project is sponsored and maintained by Code Impressions
-and is licensed under the [Apache License, Version 2.0](http://apache.org/licenses/LICENSE-2.0.html)._
+_Copyright © Code Impressions, LLC. This open-source project is sponsored and maintained by Code Impressions and is licensed under the [Apache License, Version 2.0](http://apache.org/licenses/LICENSE-2.0.html)._
