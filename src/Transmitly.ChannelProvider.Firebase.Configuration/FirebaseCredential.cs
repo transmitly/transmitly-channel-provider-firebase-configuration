@@ -30,6 +30,10 @@ namespace Transmitly.ChannelProvider.Firebase.Configuration
 		public bool IsAccessToken => !string.IsNullOrWhiteSpace(AccessToken);
 		public bool IsFilePath => !string.IsNullOrWhiteSpace(FilePath);
 		public bool IsDefault { get; private set; }
+		/// <summary>
+		/// The kind of credential the JSON, file or stream must contain.
+		/// </summary>
+		public FirebaseCredentialType Type { get; private set; }
 
 		/// <summary>
 		/// Returns the Application Default Credentials which are ambient credentials that identify and authorize
@@ -45,10 +49,11 @@ namespace Transmitly.ChannelProvider.Firebase.Configuration
 		/// Loads credential from a string containing JSON credential data.
 		/// </summary>
 		/// <param name="json">The JSON credential data.</param>
+		/// <param name="type">The kind of credential the JSON must contain; anything else is rejected.</param>
 		/// <returns>A credential based on the provided JSON.</returns>
-		public static FirebaseCredential FromJson(string json)
+		public static FirebaseCredential FromJson(string json, FirebaseCredentialType type = FirebaseCredentialType.ServiceAccount)
 		{
-			return new FirebaseCredential { Json = json };
+			return new FirebaseCredential { Json = json, Type = type };
 		}
 
 		/// <summary>
@@ -66,20 +71,22 @@ namespace Transmitly.ChannelProvider.Firebase.Configuration
 		/// Loads credential from the specified file containing JSON credential data.
 		/// </summary>
 		/// <param name="filePath">The path to the credential file.</param>
+		/// <param name="type">The kind of credential the file must contain; anything else is rejected.</param>
 		/// <returns>A credential based on the provided file.</returns>
-		public static FirebaseCredential FromFile(string filePath)
+		public static FirebaseCredential FromFile(string filePath, FirebaseCredentialType type = FirebaseCredentialType.ServiceAccount)
 		{
-			return new FirebaseCredential { FilePath = filePath };
+			return new FirebaseCredential { FilePath = filePath, Type = type };
 		}
 
 		/// <summary>
 		/// Loads credential from stream containing JSON credential data.
 		/// </summary>
 		/// <param name="stream">The stream containing the credential data.</param>
+		/// <param name="type">The kind of credential the stream must contain; anything else is rejected.</param>
 		/// <returns>A credential based on the provided stream.</returns>
-		public static FirebaseCredential FromStream(Stream stream)
+		public static FirebaseCredential FromStream(Stream stream, FirebaseCredentialType type = FirebaseCredentialType.ServiceAccount)
 		{
-			return new FirebaseCredential { Stream = stream };
+			return new FirebaseCredential { Stream = stream, Type = type };
 		}
 	}
 }

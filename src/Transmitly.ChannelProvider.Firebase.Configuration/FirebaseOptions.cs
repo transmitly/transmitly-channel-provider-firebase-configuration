@@ -33,12 +33,10 @@ namespace Transmitly.ChannelProvider.Firebase.Configuration
 		public string? ServiceAccountId { get; set; }
 
 		/// <summary>
-		/// Firebase SDK uses a singleton pattern to manage firebase applications. This property is used to specify 
-		/// the name of the application for which the credential is used. If not specified, it will be used for the 
-		/// default application and any subsequent instance will reuse the initial credential. 
-		/// 
-		/// If specified, it will be used for the application with the specified name and any subsequent instance 
-		/// with the same name will reuse the initial credential.
+		/// Name of the Firebase app this provider sends through. If the host has already created a Firebase app
+		/// with this name, that app and its credential are used as is. Otherwise an app is kept per name and
+		/// credential, so providers with different credentials never share an app and a changed credential
+		/// gets a new one.
 		/// </summary>
 		public string AppName { get; set; } = "default";
 
